@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BiUpvote, BiDownvote, BiComment } from 'react-icons/bi';
+import parse from 'html-react-parser';
 import { postedAt } from '../utils/index';
 
 export default function ThreadItem(
@@ -10,11 +11,15 @@ export default function ThreadItem(
   },
 ) {
   return (
-    <div className="max-h-48 flex flex-col gap-2">
-      <div>{category}</div>
-      <h1>{title}</h1>
-      <p>{body}</p>
-      <div className="flex flex-row gap-4">
+    <div className="container flex flex-col gap-2 px-14 max-w-6xl">
+      <header>
+        <div>{category}</div>
+        <h1>{title}</h1>
+      </header>
+      <div className="text-ellipsis line-clamp-4">
+        {parse(body)}
+      </div>
+      <div className="flex flex-row gap-4 items-center">
         <div className="flex flex-row gap-[2px] items-center">
           <BiUpvote />
           <span>{upVotesBy.length}</span>
@@ -27,8 +32,8 @@ export default function ThreadItem(
           <BiComment />
           <span>{totalComments}</span>
         </div>
-        <div>{postedAt(createdAt)}</div>
-        <div>
+        <div className="items-center">{postedAt(createdAt)}</div>
+        <div className="items-center">
           Dibuat oleh
           {' '}
           <span>{ownerId}</span>
