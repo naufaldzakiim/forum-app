@@ -114,7 +114,6 @@ const api = (() => {
     }
 
     const { data: { threads } } = responseJson;
-
     return threads;
   }
 
@@ -345,6 +344,6 @@ const api = (() => {
     voteNeutralComment,
     getLeaderboards,
   };
-});
+})();
 
 export default api;
