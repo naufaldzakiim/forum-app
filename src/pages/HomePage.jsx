@@ -12,6 +12,7 @@ export default function HomePage() {
   const {
     threads = [],
     users = [],
+    authUser,
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
