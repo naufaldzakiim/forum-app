@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { BiUpvote, BiDownvote, BiComment } from 'react-icons/bi';
 import parse from 'html-react-parser';
 import { postedAt } from '../utils/index';
@@ -8,12 +9,25 @@ import { postedAt } from '../utils/index';
 export default function ThreadItem(
   {
     id, title, body, category, createdAt, ownerId, upVotesBy, downVotesBy, totalComments,
+    upVote, downVote,
   },
 ) {
+  const onUpVoteClick = (event) => {
+    event.stopPropagation();
+    upVote(id);
+  };
+
+  const onDownVoteClick = (event) => {
+    event.stopPropagation();
+    downVote(id);
+  };
   return (
     <div className="container flex flex-col gap-2 px-14 max-w-6xl">
       <header>
-        <div>{category}</div>
+        <div>
+          <span>#</span>
+          <span>{category}</span>
+        </div>
         <h1>{title}</h1>
       </header>
       <div className="text-ellipsis line-clamp-4">
@@ -21,11 +35,11 @@ export default function ThreadItem(
       </div>
       <div className="flex flex-row gap-4 items-center">
         <div className="flex flex-row gap-[2px] items-center">
-          <BiUpvote />
+          <BiUpvote onClick={onUpVoteClick} />
           <span>{upVotesBy.length}</span>
         </div>
         <div className="flex flex-row gap-[2px] items-center">
-          <BiDownvote />
+          <BiDownvote onClick={onDownVoteClick} />
           <span>{downVotesBy.length}</span>
         </div>
         <div className="flex flex-row gap-[3px] items-center">

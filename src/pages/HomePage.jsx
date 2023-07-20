@@ -21,10 +21,15 @@ export default function HomePage() {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
 
-  // const onUpVoteThread = (threadId) => {
-  //   const isUpVoted = threads.find((thread) => thread.id === threadId).upVotesBy.includes(authUser.id);
-  //   dispatch(asyncUpVoteThread(threadId));
-  // };
+  const onUpVoteThread = (threadId) => {
+    // const isUpVoted = threads.find((thread) => thread.id === threadId).upVotesBy.includes(authUser.id);
+    dispatch(asyncUpVoteThread(threadId));
+  };
+
+  const onDownVoteThread = (threadId) => {
+    // const isDownVoted = threads.find((thread) => thread.id === threadId).upVotesBy.includes(authUser.id);
+    dispatch(asyncUpVoteThread(threadId));
+  };
 
   const threadList = threads.map((thread) => ({
     ...thread,
@@ -34,7 +39,7 @@ export default function HomePage() {
   return (
     <section className="container mx-auto flex flex-col items-center" id="homepage">
       <h1>Diskusi tersedia</h1>
-      <ThreadList threads={threadList} />
+      <ThreadList threads={threadList} upVoteThread={onUpVoteThread} downVoteThread={onDownVoteThread} />
     </section>
   );
 }
