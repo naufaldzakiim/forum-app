@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import { asyncSetAuthUser } from '../authUser/action';
 
 const ActionType = {
   RECEIVE_USERS: 'RECEIVE_USERS',
@@ -14,9 +15,10 @@ function receiveUsersActionCreator(users) {
 }
 
 function asyncRegisterUser({ name, email, password }) {
-  return async () => {
+  return async (dispatch) => {
     try {
       await api.register({ name, email, password });
+      dispatch(asyncSetAuthUser({ email, password }));
     } catch (error) {
       alert(error.message);
     }

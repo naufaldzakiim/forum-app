@@ -16,7 +16,7 @@ export default function RegisterPage() {
   return (
     <section className="container mx-auto flex flex-col items-center" id="loginpage">
       <h1>Login</h1>
-      <RegisterInput login={onRegister} />
+      <RegisterInput register={onRegister} />
       <p>
         Already have an account?
         {' '}

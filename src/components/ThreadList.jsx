@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ThreadItem, { threadItemShape } from './ThreadItem';
 
-export default function ThreadList({ threads, upVoteThread, downVoteThread }) {
+export default function ThreadList({ threads }) {
   return (
     <div className="flex flex-col gap-8">
       {threads.map((thread) => (
-        <ThreadItem key={thread.id} {...thread} upVote={upVoteThread} downVote={downVoteThread} />
+        <ThreadItem key={thread.id} {...thread} />
       ))}
     </div>
   );

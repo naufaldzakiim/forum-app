@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Loading from './components/LoadingBar';
 import HomePage from './pages/HomePage';
 import Navigation from './components/Navigation';
 import LoginPage from './pages/LoginPage';
@@ -33,31 +34,35 @@ function App() {
 
   if (authUser === null) {
     return (
-      <div>
+      <>
+        <Loading />
         <main>
           <Routes>
             <Route path="/*" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
         </main>
-      </div>
+      </>
     );
   }
 
   return (
-    <div>
-      <header className="container mx-auto">
-        <Navigation logout={onLogOut} />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/leaderboards" element={<LeaderBoardPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/new-thread" element={<NewThreadPage />} />
-        </Routes>
-      </main>
-    </div>
+    <>
+      <Loading />
+      <div>
+        <header className="container mx-auto">
+          <Navigation logout={onLogOut} />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/leaderboards" element={<LeaderBoardPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/new-thread" element={<NewThreadPage />} />
+          </Routes>
+        </main>
+      </div>
+    </>
   );
 }
 
