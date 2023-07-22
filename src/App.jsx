@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import LeaderBoardPage from './pages/LeaderBoardPage';
 import ProfilePage from './pages/ProfilePage';
 import NewThreadPage from './pages/NewThreadPage';
+import ThreadDetailPage from './pages/ThreadDetailPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 
@@ -59,6 +60,7 @@ function App() {
             <Route path="/leaderboards" element={<LeaderBoardPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/new-thread" element={<NewThreadPage />} />
+            <Route path="/thread/:id" element={<ThreadDetailPage />} />
           </Routes>
         </main>
       </div>

@@ -1,35 +1,39 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {
-  BiUpvote, BiSolidUpvote, BiDownvote, BiSolidDownvote, BiComment,
-} from 'react-icons/bi';
+import { BiComment } from 'react-icons/bi';
 import parse from 'html-react-parser';
+import VoteButton from './VoteButton';
 import { postedAt } from '../utils/index';
-import { asyncUpVoteThread, asyncDownVoteThread } from '../states/threads/action';
+import { asyncUpVoteThread, asyncDownVoteThread, asyncNeutralVoteThread } from '../states/threads/action';
 
 export default function ThreadItem(
   {
-    id, title, body, category, createdAt, user, upVotesBy, downVotesBy, totalComments,
-    ownerName, authUser,
+    id, title, body, category, createdAt, upVotesBy, downVotesBy, totalComments, owner, authUser,
   },
 ) {
   const isVotedUp = upVotesBy.includes(authUser);
   const isVotedDown = downVotesBy.includes(authUser);
-  const { name } = user;
+  const { name } = owner;
   const dispatch = useDispatch();
 
   const onUpVoteClick = () => {
-    dispatch(asyncUpVoteThread(id));
+    if (isVotedUp) {
+      dispatch(asyncNeutralVoteThread(id));
+    } else {
+      dispatch(asyncUpVoteThread(id));
+    }
   };
 
   const onDownVoteClick = () => {
-    dispatch(asyncDownVoteThread(id));
+    if (isVotedDown) {
+      dispatch(asyncNeutralVoteThread(id));
+    } else {
+      dispatch(asyncDownVoteThread(id));
+    }
   };
+
   return (
     <div className="container flex flex-col gap-2 px-14 max-w-6xl">
       <header>
@@ -37,7 +41,7 @@ export default function ThreadItem(
           <span>#</span>
           <span>{category}</span>
         </div>
-        <h1>{title}</h1>
+        <Link to={`/thread/${id}`}>{title}</Link>
       </header>
 
       <div className="text-ellipsis line-clamp-4">
@@ -45,19 +49,8 @@ export default function ThreadItem(
       </div>
 
       <div className="flex flex-row gap-4 items-center">
-        <div className="flex flex-row gap-[2px] items-center">
-          <div onClick={onUpVoteClick}>
-            {isVotedUp ? <BiSolidUpvote className="text-green-600" /> : <BiUpvote />}
-          </div>
-          <span>{upVotesBy.length}</span>
-        </div>
-
-        <div className="flex flex-row gap-[2px] items-center">
-          <div onClick={onDownVoteClick}>
-            {isVotedDown ? <BiSolidDownvote className="text-red-600" /> : <BiDownvote />}
-          </div>
-          <span>{downVotesBy.length}</span>
-        </div>
+        <VoteButton type="up" isActive={isVotedUp} onClick={onUpVoteClick} count={upVotesBy.length} />
+        <VoteButton type="down" isActive={isVotedDown} onClick={onDownVoteClick} count={downVotesBy.length} />
 
         <div className="flex flex-row gap-[3px] items-center">
           <BiComment />
@@ -81,7 +74,6 @@ const threadItemShape = {
   body: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   totalComments: PropTypes.number.isRequired,
@@ -96,12 +88,12 @@ const userShape = {
 
 ThreadItem.propTypes = {
   ...threadItemShape,
-  user: PropTypes.shape(userShape),
+  owner: PropTypes.shape(userShape),
   authUser: PropTypes.string.isRequired,
 };
 
 ThreadItem.defaultProps = {
-  user: {},
+  owner: {},
 };
 
-export { threadItemShape };
+export { threadItemShape, userShape };

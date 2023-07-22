@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ThreadItem, { threadItemShape } from './ThreadItem';
+import ThreadItem, { threadItemShape, userShape } from './ThreadItem';
 
 export default function ThreadList({ threads }) {
   return (
@@ -13,8 +12,12 @@ export default function ThreadList({ threads }) {
   );
 }
 
+const threadsShape = {
+  ...threadItemShape,
+  owner: PropTypes.shape(userShape).isRequired,
+  authUser: PropTypes.string.isRequired,
+};
+
 ThreadList.propTypes = {
-  threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
-  upVoteThread: PropTypes.func.isRequired,
-  downVoteThread: PropTypes.func.isRequired,
+  threads: PropTypes.arrayOf(PropTypes.shape(threadsShape)).isRequired,
 };
