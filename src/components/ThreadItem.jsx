@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -35,13 +36,13 @@ export default function ThreadItem(
   };
 
   return (
-    <div className="container flex flex-col gap-2 px-14 max-w-6xl">
-      <header>
-        <div>
+    <div className="container flex flex-col gap-2 max-w-4xl py-6 px-6 rounded-xl bg-white">
+      <header className="flex flex-col gap-2">
+        <div className="border w-fit rounded-lg px-2 py-[2px]">
           <span>#</span>
           <span>{category}</span>
         </div>
-        <Link to={`/thread/${id}`}>{title}</Link>
+        <Link to={`/thread/${id}`} className="text-xl">{title}</Link>
       </header>
 
       <div className="text-ellipsis line-clamp-4">
@@ -52,16 +53,16 @@ export default function ThreadItem(
         <VoteButton type="up" isActive={isVotedUp} onClick={onUpVoteClick} count={upVotesBy.length} />
         <VoteButton type="down" isActive={isVotedDown} onClick={onDownVoteClick} count={downVotesBy.length} />
 
-        <div className="flex flex-row gap-[3px] items-center">
+        <div className="flex flex-row gap-[3px] items-center text-lg">
           <BiComment />
           <span>{totalComments}</span>
         </div>
 
-        <div className="items-center">{postedAt(createdAt)}</div>
-        <div className="items-center">
-          Dibuat oleh
-          {' '}
-          <span>{name}</span>
+        <div className="items-center text-base flex flex-row gap-3">
+          <div>
+            Oleh {name}
+          </div>
+          <div className="items-center">{postedAt(createdAt)}</div>
         </div>
       </div>
     </div>

@@ -13,14 +13,16 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="container mx-auto flex flex-col items-center" id="loginpage">
-      <h1>Login</h1>
-      <LoginInput login={onLogin} />
-      <p>
-        Don&apos;t have an account?
-        {' '}
-        <Link to="/register">Register</Link>
-      </p>
+    <section className="container h-[75vh] mx-auto my-auto flex flex-col items-center justify-center text-[#282118] font-[Arapey]" id="loginpage">
+      <div className="bg-white px-6 py-4 rounded-3xl flex flex-col items-center min-w-[18rem]">
+        <h1 className="text-3xl text-center">Login</h1>
+        <LoginInput login={onLogin} />
+        <p className="text-lg mt-6">
+          Belum punya akun?
+          {' '}
+          <Link to="/register" className="underline">Daftar</Link>
+        </p>
+      </div>
     </section>
   );
 }

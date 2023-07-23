@@ -42,33 +42,38 @@ export default function ThreadDetail({ threadDetail, authUser }) {
   }));
 
   return (
-    <div className="container mx-auto max-w-5xl">
-      <div className="flex flex-col gap-2">
-        <div>
-          <span>#{category}</span>
-          <h1>{title}</h1>
-        </div>
-        <div className="flex flex-row gap-3">
-          <img src={owner.avatar} alt={`${owner.name} avatar`} className="h-[30px] rounded-full" />
-          <p>
-            oleh{' '}{owner.name}
-          </p>
-          <p>{postedAt(createdAt)}</p>
+    <div className="container mx-auto flex flex-col items-center gap-6 max-w-4xl">
+      <div className="flex flex-col gap-2 bg-white w-full rounded-xl px-6 py-6">
+        <div className="flex flex-row gap-3 items-center text-xl">
+          <img src={owner.avatar} alt={`${owner.name} avatar`} className="h-[32px] rounded-full" />
+          <div className="flex flex-row justify-between w-full">
+            <p>
+              {owner.name}
+            </p>
+            <p>{postedAt(createdAt)}</p>
+          </div>
         </div>
         <div>
+          <h1 className="text-3xl">{title}</h1>
+        </div>
+        <div className="text-xl">
           {parse(body)}
         </div>
-        <div className="flex flex-row gap-1">
-          <VoteButton type="up" isActive={isVotedUp} count={upVotesBy.length} onClick={onUpTDVoteClick} />
-          <VoteButton type="down" isActive={isVotedDown} count={downVotesBy.length} onClick={onDownTDVoteClick} />
+        <div className="flex flex-row gap-3 border-b pb-4 items-center">
+          <div className="flex flex-row gap-2">
+            <VoteButton type="up" isActive={isVotedUp} count={upVotesBy.length} onClick={onUpTDVoteClick} />
+            <VoteButton type="down" isActive={isVotedDown} count={downVotesBy.length} onClick={onDownTDVoteClick} />
+          </div>
+          <span className="text-lg border rounded-lg px-2">#{category}</span>
+        </div>
+
+        <div className="flex flex-col pt-1 gap-1">
+          <h1 className="text-xl">Beri komentar</h1>
+          <CommentInput threadId={id} />
         </div>
       </div>
-      <div>
-        <h1>Beri komentar</h1>
-        <CommentInput threadId={id} />
-      </div>
-      <div>
-        <h1>Komentar({comments.length})
+      <div className="flex flex-col w-full gap-3">
+        <h1 className="text-2xl">Komentar ({comments.length})
         </h1>
         <CommentList comments={commentList} />
       </div>

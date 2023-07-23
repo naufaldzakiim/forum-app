@@ -11,7 +11,6 @@ import LeaderboardsPage from './pages/LeaderboardsPage';
 import NewThreadPage from './pages/NewThreadPage';
 import ThreadDetailPage from './pages/ThreadDetailPage';
 import { asyncPreloadProcess } from './states/isPreload/action';
-import { asyncUnsetAuthUser } from './states/authUser/action';
 
 function App() {
   const {
@@ -24,10 +23,6 @@ function App() {
   useEffect(() => {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
-
-  const onLogOut = () => {
-    dispatch(asyncUnsetAuthUser());
-  };
 
   if (isPreload) {
     return null;
@@ -50,13 +45,13 @@ function App() {
   return (
     <>
       <Loading />
-      <div>
-        <header className="container mx-auto">
-          <Navigation logout={onLogOut} />
+      <div className="relative">
+        <header className="container mx-auto max-w-5xl">
+          <Navigation authUser={authUser} />
         </header>
-        <main>
+        <main className=" mt-[90px]">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/*" element={<HomePage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/new-thread" element={<NewThreadPage />} />

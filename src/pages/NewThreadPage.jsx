@@ -14,8 +14,8 @@ export default function NewThreadPage() {
   };
 
   return (
-    <section className="container mx-auto max-w-6xl flex flex-col items-center w-full">
-      <h1>Buat Diskusi Baru</h1>
+    <section className="container my-6 mx-auto max-w-6xl flex flex-col gap-3 items-center w-full text-[#282118] font-[Arapey]">
+      <h1 className="text-3xl">Buat Diskusi Baru</h1>
       <CreateThreadInput create={onCreate} />
     </section>
   );

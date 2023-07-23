@@ -16,7 +16,7 @@ export default function ThreadDetailPage() {
   if (threadDetail === null) return null;
 
   return (
-    <section className="container mx-auto flex flex-col items-center">
+    <section className="container mx-auto flex flex-col my-6 max-w-5xl items-center text-[#282118] font-[Arapey]">
       <ThreadDetail threadDetail={threadDetail} authUser={authUser.id} />
     </section>
   );

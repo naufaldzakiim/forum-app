@@ -4,7 +4,7 @@ import CommentItem, { commentItemShape } from './CommentItem';
 
 export default function CommentList({ comments }) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {comments.map((comment) => (
         <CommentItem key={comment.id} {...comment} />
       ))}

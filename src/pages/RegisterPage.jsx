@@ -14,14 +14,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <section className="container mx-auto flex flex-col items-center" id="loginpage">
-      <h1>Login</h1>
-      <RegisterInput register={onRegister} />
-      <p>
-        Already have an account?
-        {' '}
-        <Link to="/login">Login</Link>
-      </p>
+    <section className="container h-[75vh] mx-auto my-auto flex flex-col items-center justify-center text-[#282118] font-[Arapey]" id="loginpage">
+      <div className="bg-white px-6 py-4 rounded-3xl flex flex-col items-center min-w-[18rem]">
+        <h1 className="text-3xl text-center">Register</h1>
+        <RegisterInput register={onRegister} />
+        <p className="text-lg mt-6">
+          Sudah punya akun?
+          {' '}
+          <Link to="/login" className="underline">Masuk</Link>
+        </p>
+      </div>
     </section>
   );
 }

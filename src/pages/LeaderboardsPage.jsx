@@ -16,8 +16,8 @@ export default function LeaderboardsPage() {
   }));
 
   return (
-    <div className="container flex flex-col mx-auto max-w-5xl">
-      <h1>Pengguna Teratas</h1>
+    <div className="container flex flex-col mx-auto max-w-xl my-6 bg-white rounded-xl px-5 py-4 font-[Arapey] text-[#282118]">
+      <h1 className="text-3xl text-center">Pengguna Teratas</h1>
       <LeaderboardsList leaderboards={leaderboardList} />
     </div>
   );

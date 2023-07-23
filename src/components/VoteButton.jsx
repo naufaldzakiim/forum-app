@@ -11,7 +11,7 @@ export default function VoteButton({
 }) {
   if (type === 'up') {
     return (
-      <div className="flex flex-row gap-[2px] items-center">
+      <div className="flex flex-row gap-[2px] items-center text-lg">
         <div onClick={onClick}>
           {isActive ? <BiSolidUpvote className="text-green-600" /> : <BiUpvote />}
         </div>
@@ -22,7 +22,7 @@ export default function VoteButton({
 
   if (type === 'down') {
     return (
-      <div className="flex flex-row gap-[2px] items-center">
+      <div className="flex flex-row gap-[2px] items-center text-lg">
         <div onClick={onClick}>
           {isActive ? <BiSolidDownvote className="text-red-600" /> : <BiDownvote />}
         </div>

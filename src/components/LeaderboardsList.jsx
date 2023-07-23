@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 export default function LeaderboardsList({ leaderboards }) {
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row justify-between">
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-row justify-between text-2xl">
         <p>Pengguna</p>
         <p>Skor</p>
       </div>
       {leaderboards.map((leaderboard) => (
-        <div key={leaderboard.user.id} className="flex flex-row justify-between">
-          <div className="flex flex-row">
+        <div key={leaderboard.user.id} className="flex flex-row justify-between text-xl">
+          <div className="flex flex-row gap-3">
             <img src={leaderboard.user.avatar} alt={leaderboard.user.name} className="h-[30px] rounded-full" />
             <p>{leaderboard.user.name}</p>
           </div>

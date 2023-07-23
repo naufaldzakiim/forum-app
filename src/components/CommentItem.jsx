@@ -31,20 +31,20 @@ export default function CommentItem({
   };
 
   return (
-    <div className="flex flex-col">
-      <header className="flex flex-row gap-7 items-center">
-        <img src={avatar} alt={`${name} avatar`} className="h-[45px] rounded-full" />
-        <div className="flex flex-col">
-          <p>{name}</p>
-          <p>{postedAt(createdAt)}</p>
+    <div className="flex flex-row w-fit bg-white rounded-lg px-5 py-4 gap-4 items-start">
+      <img src={avatar} alt={`${name} avatar`} className="h-[52px] rounded-full" />
+      <div className="w-full">
+        <div className="flex flex-row items-center justify-between min-w-[16rem]">
+          <p className="text-2xl">{name}</p>
+          <p className="text-base">{postedAt(createdAt)}</p>
         </div>
-      </header>
-      <div>
-        {parse(content)}
-      </div>
-      <div className="flex flex-row gap-4">
-        <VoteButton type="up" isActive={isVotedUp} onClick={onUpVoteCommentClick} count={upVotesBy.length} />
-        <VoteButton type="down" isActive={isVotedDown} onClick={onDownVoteCommentClick} count={downVotesBy.length} />
+        <div className="text-xl flex flex-row items-start justify-between gap-5">
+          {parse(content)}
+          <div className="flex flex-row gap-2">
+            <VoteButton type="up" isActive={isVotedUp} onClick={onUpVoteCommentClick} count={upVotesBy.length} />
+            <VoteButton type="down" isActive={isVotedDown} onClick={onDownVoteCommentClick} count={downVotesBy.length} />
+          </div>
+        </div>
       </div>
     </div>
   );
