@@ -32,8 +32,12 @@ export default function VoteButton({
 }
 
 VoteButton.propTypes = {
+  /** The type of the vote button */
   type: PropTypes.oneOf(['up', 'down']).isRequired,
+  /** The toggled condition of the button */
   isActive: PropTypes.bool.isRequired,
+  /** Action when VoteButton is clicked */
   onClick: PropTypes.func.isRequired,
+  /** Total or count of the users vote */
   count: PropTypes.number.isRequired,
 };

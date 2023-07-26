@@ -36,11 +36,11 @@ export default function ThreadItem(
   };
 
   return (
-    <div className="container flex flex-col gap-2 max-w-4xl py-6 px-6 rounded-xl bg-white">
+    <div className="container flex flex-col gap-2 w-full py-6 px-6 rounded-xl bg-white">
       <header className="flex flex-col gap-2">
         <div className="border w-fit rounded-lg px-2 py-[2px]">
           <span>#</span>
-          <span>{category}</span>
+          <span className="catcontainer">{category}</span>
         </div>
         <Link to={`/thread/${id}`} className="text-xl">{title}</Link>
       </header>

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RiAddCircleFill } from 'react-icons/ri';
 import ThreadList from '../components/ThreadList';
+import Filter from '../components/Filter';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
 
 export default function HomePage() {
@@ -24,10 +25,24 @@ export default function HomePage() {
     authUser: authUser.id,
   }));
 
+  const [selectedCat, setSelectedCat] = useState('');
+  const categories = [...new Set(threads.map((thread) => thread.category))];
+
+  const onSelectCatHandle = (e) => {
+    const category = e.target.innerText;
+    if (category === selectedCat) setSelectedCat('');
+    else setSelectedCat(category);
+  };
+
+  const filteredThreads = (selectedCat !== '')
+    ? threadList.filter((thread) => thread.category === selectedCat.split('#')[1])
+    : threadList;
+
   return (
     <section className="container mx-auto max-w-5xl flex flex-col items-center text-[#282118] font-[Arapey] my-6 gap-6" id="homepage">
       <h1 className=" text-3xl">Diskusi tersedia</h1>
-      <ThreadList threads={threadList} />
+      <Filter categories={categories} selectedCategory={selectedCat} onSelect={onSelectCatHandle} />
+      <ThreadList threads={filteredThreads} />
       <Link to="/new-thread"><RiAddCircleFill className="fixed bottom-5 right-5 text-[56px]" /></Link>
     </section>
   );

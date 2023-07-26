@@ -4,7 +4,7 @@ import ThreadItem, { threadItemShape, userShape } from './ThreadItem';
 
 export default function ThreadList({ threads }) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-full max-w-4xl">
       {threads.map((thread) => (
         <ThreadItem key={thread.id} {...thread} />
       ))}
