@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-undef */
 /**
  * skenario testing
@@ -9,7 +10,7 @@
  */
 
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoginInput from './LoginInput';
 
@@ -24,7 +25,9 @@ describe('LoginInput component', () => {
     const emailInput = await screen.getByPlaceholderText('Email');
 
     // Action
-    await userEvent.type(emailInput, 'emailtest');
+    await act(async () => {
+      await userEvent.type(emailInput, 'emailtest');
+    });
 
     // Assert
     expect(emailInput).toHaveValue('emailtest');
@@ -36,7 +39,9 @@ describe('LoginInput component', () => {
     const passwordInput = await screen.getByPlaceholderText('Password');
 
     // Action
-    await userEvent.type(passwordInput, 'passwordtest');
+    await act(async () => {
+      await userEvent.type(passwordInput, 'passwordtest');
+    });
 
     // Assert
     expect(passwordInput).toHaveValue('passwordtest');
@@ -49,13 +54,15 @@ describe('LoginInput component', () => {
     const mockLogin = jest.fn();
     render(<LoginInput login={mockLogin} />);
     const emailInput = await screen.getByPlaceholderText('Email');
-    await userEvent.type(emailInput, 'emailtest');
     const passwordInput = await screen.getByPlaceholderText('Password');
-    await userEvent.type(passwordInput, 'passwordtest');
     const loginButton = await screen.getByRole('button', { name: 'Login' });
 
     // Action
-    await userEvent.click(loginButton);
+    await act(async () => {
+      await userEvent.type(emailInput, 'emailtest');
+      await userEvent.type(passwordInput, 'passwordtest');
+      await userEvent.click(loginButton);
+    });
 
     // Assert
     expect(mockLogin).toHaveBeenCalledWith({

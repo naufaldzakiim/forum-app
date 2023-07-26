@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-undef */
 /**
  * skenario testing
@@ -10,7 +11,7 @@
  */
 
 import React from 'react';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import RegisterInput from './RegisterInput';
 
@@ -25,7 +26,9 @@ describe('RegisterInput component', () => {
     const emailInput = await screen.getByPlaceholderText('Email');
 
     // Action
-    await userEvent.type(emailInput, 'emailtest');
+    await act(async () => {
+      await userEvent.type(emailInput, 'emailtest');
+    });
 
     // Assert
     expect(emailInput).toHaveValue('emailtest');
@@ -37,7 +40,9 @@ describe('RegisterInput component', () => {
     const nameInput = await screen.getByPlaceholderText('Name');
 
     // Action
-    await userEvent.type(nameInput, 'nametest');
+    await act(async () => {
+      await userEvent.type(nameInput, 'nametest');
+    });
 
     // Assert
     expect(nameInput).toHaveValue('nametest');
@@ -49,7 +54,9 @@ describe('RegisterInput component', () => {
     const passwordInput = await screen.getByPlaceholderText('Password');
 
     // Action
-    await userEvent.type(passwordInput, 'passwordtest');
+    await act(async () => {
+      await userEvent.type(passwordInput, 'passwordtest');
+    });
 
     // Assert
     expect(passwordInput).toHaveValue('passwordtest');
@@ -62,15 +69,17 @@ describe('RegisterInput component', () => {
     const mockRegister = jest.fn();
     render(<RegisterInput register={mockRegister} />);
     const emailInput = await screen.getByPlaceholderText('Email');
-    await userEvent.type(emailInput, 'emailtest');
     const nameInput = await screen.getByPlaceholderText('Name');
-    await userEvent.type(nameInput, 'nametest');
     const passwordInput = await screen.getByPlaceholderText('Password');
-    await userEvent.type(passwordInput, 'passwordtest');
     const registerButton = await screen.getByRole('button', { name: 'Register' });
 
     // Action
-    await userEvent.click(registerButton);
+    await act(async () => {
+      await userEvent.type(emailInput, 'emailtest');
+      await userEvent.type(nameInput, 'nametest');
+      await userEvent.type(passwordInput, 'passwordtest');
+      await userEvent.click(registerButton);
+    });
 
     // Assert
     expect(mockRegister).toHaveBeenCalledWith({
