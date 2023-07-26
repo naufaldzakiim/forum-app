@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -12,9 +11,9 @@ export default function VoteButton({
   if (type === 'up') {
     return (
       <div className="flex flex-row gap-[2px] items-center text-lg">
-        <div onClick={onClick}>
+        <button onClick={onClick}>
           {isActive ? <BiSolidUpvote className="text-green-600" /> : <BiUpvote />}
-        </div>
+        </button>
         <span>{count}</span>
       </div>
     );
@@ -23,9 +22,9 @@ export default function VoteButton({
   if (type === 'down') {
     return (
       <div className="flex flex-row gap-[2px] items-center text-lg">
-        <div onClick={onClick}>
+        <button onClick={onClick}>
           {isActive ? <BiSolidDownvote className="text-red-600" /> : <BiDownvote />}
-        </div>
+        </button>
         <span>{count}</span>
       </div>
     );
