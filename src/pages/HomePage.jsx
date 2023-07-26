@@ -40,7 +40,7 @@ export default function HomePage() {
 
   return (
     <section className="container mx-auto max-w-5xl flex flex-col items-center text-[#282118] font-[Arapey] my-6 gap-6" id="homepage">
-      <h1 className=" text-3xl">Diskusi tersedia</h1>
+      <h1 className=" text-3xl">Semua Threads</h1>
       <Filter categories={categories} selectedCategory={selectedCat} onSelect={onSelectCatHandle} />
       <ThreadList threads={filteredThreads} />
       <Link to="/new-thread"><RiAddCircleFill className="fixed bottom-5 right-5 text-[56px]" /></Link>
