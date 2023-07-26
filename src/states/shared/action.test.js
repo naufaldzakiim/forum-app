@@ -19,7 +19,7 @@ const fakeThreadsResponse = [
     title: 'Thread Pertama',
     body: 'Ini adalah thread pertama',
     category: 'General',
-    createdAt: '2023-04-21T07:00:00.000Z',
+    createdAt: '2021-06-21T07:00:00.000Z',
     ownerId: 'users-1',
     upVotesBy: [],
     downVotesBy: [],
